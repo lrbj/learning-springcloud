@@ -1,5 +1,6 @@
 package com.imooc.order.service.impl;
 
+import com.imooc.order.client.ProductClient;
 import com.imooc.order.dataobject.OrderMaster;
 import com.imooc.order.dto.OrderDTO;
 import com.imooc.order.enums.OrderStatusEnum;
@@ -28,9 +29,15 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderMasterRepository orderMasterRepository;
 
+    @Autowired
+    private ProductClient productClient;
+
     @Override
     public OrderDTO create(OrderDTO orderDTO) {
-        KeyUtil keyUtil = new KeyUtil ();
+
+        //查询商品信息（调调）
+
+       KeyUtil keyUtil = new KeyUtil ();
         OrderMaster orderMaster = new OrderMaster ();
         orderDTO.setOrderId ( keyUtil.genUniqueKey () );
         BeanUtils.copyProperties ( orderDTO, orderMaster );

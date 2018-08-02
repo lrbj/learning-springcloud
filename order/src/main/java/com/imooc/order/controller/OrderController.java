@@ -8,6 +8,7 @@ import com.imooc.order.exception.OrderException;
 import com.imooc.order.form.OrderForm;
 import com.imooc.order.service.OrderService;
 import com.imooc.order.utils.ResultVOUtil;
+import io.swagger.annotations.ApiImplicitParam;
 import javafx.print.Collation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.ResourceUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,7 +44,8 @@ public class OrderController {
      * 5、订单入库
      */
     @PostMapping("/create")
-    public ResultVO<Map<String, String >> create(@Valid OrderForm orderForm,BindingResult bindingResult){
+    @ApiImplicitParam( name = "orderForm", value = "订单信息", required = true, dataType = "OrderForm")
+    public ResultVO<Map<String, String >> create(@Valid @RequestBody  OrderForm orderForm,BindingResult bindingResult){
 
         if( bindingResult.hasErrors ()){
             log.error("创建订单，参数不正确， orerForm = {}", orderForm);

@@ -26,17 +26,20 @@ public class OrderForm2OrderDTOConverter {
         orderDTO.setBuyerName ( orderForm.getName () );
         orderDTO.setBuyerPhone ( orderForm.getPhone () );
         orderDTO.setBuyerAddress ( orderForm.getAddress () );
-        orderDTO.setOrderId ( orderForm.getOpenid () );
+        orderDTO.setBuyerOpenid ( orderForm.getOpenid () );
 
-        List<OrderDetail> orderDetailList = new ArrayList<> ();
-        try{
-        gson.fromJson ( orderForm.getItems (), new TypeToken<List<OrderDetail>> (){}.getType () );
-        }catch (Exception e){
-             log.error ( "json 转换 错误， string={}", orderForm.getItems () );
-             throw   new OrderException ( ResultEnum.PARAM_ERROR );
+        List<OrderDetail> orderDetailList = new ArrayList<>();
+        try {
+            orderDetailList = gson.fromJson(orderForm.getItems(),
+                    new TypeToken<List<OrderDetail>>() {
+                    }.getType());
+        } catch (Exception e) {
+            log.error("【json转换】错误, string={}", orderForm.getItems());
+            throw new OrderException(ResultEnum.PARAM_ERROR);
         }
-        orderDTO.setOrderDetailList ( orderDetailList );
-       return  orderDTO;
+        orderDTO.setOrderDetailList(orderDetailList);
+
+        return  orderDTO;
     }
 
 }

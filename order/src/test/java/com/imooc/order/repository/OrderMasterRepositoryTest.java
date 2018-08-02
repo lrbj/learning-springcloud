@@ -38,10 +38,9 @@ public class OrderMasterRepositoryTest  extends OrderApplicationTests {
         orderMaster.setOrderStatus ( OrderStatusEnum.NEW.getCode () );
         orderMaster.setPayStatus ( PayStatusEnum.WAIT.getCode () );
 
-        Date time=new Date();
-        //SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        orderMaster.setCreateTime (time);
-        orderMaster.setUpdateTime ( time );
+       // Date time=new Date();
+       // orderMaster.setCreateTime (time);
+        //orderMaster.setUpdateTime ( time );
         OrderMaster result = orderMasterRepository.save ( orderMaster );
         Assert.assertTrue ( result != null  );
 

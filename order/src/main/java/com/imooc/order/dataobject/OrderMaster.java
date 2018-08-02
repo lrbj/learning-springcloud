@@ -2,6 +2,8 @@ package com.imooc.order.dataobject;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+
 import  lombok.Data;
 
 import java.math.BigDecimal;
@@ -12,6 +14,7 @@ import java.util.Date;
  * @Description:
  * @Date:Created in 3:49 PM 7/16/2018
  */
+
 @Data
 @Entity
 public class OrderMaster {
@@ -41,9 +44,11 @@ public class OrderMaster {
     private Integer payStatus;
 
     /** 创建时间. */
+    @Transient
     private Date createTime;
 
     /** 更新时间. */
+    @Transient
     private Date updateTime;
 
 }

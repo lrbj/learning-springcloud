@@ -1,5 +1,6 @@
 package com.imooc.product.controller;
 
+import com.imooc.product.DTO.CartDTO;
 import com.imooc.product.VO.ProductInfoVO;
 import com.imooc.product.VO.ProductVO;
 import com.imooc.product.VO.ResultVO;
@@ -30,6 +31,8 @@ public class ProductController {
 
     @Autowired
     private CategoryService categoryService;
+
+
     /**
      * 1、查询所有在架的商品
      * 2、获取类目type列表
@@ -71,4 +74,23 @@ public class ProductController {
 
         return ResultVOUtil.success ( productVOList );
     }
+
+
+    /**
+     * 获取商品列表 （订单服务）
+     * @param productIdList
+     * @return
+     */
+    @PostMapping("/listForOrder")
+    public  List<ProductInfo> listForOrder(@RequestBody  List<String> productIdList){
+
+        return  productService.findList ( productIdList );
+    }
+
+    @PostMapping("/decreaseStock")
+    public  void decreaseStock(@RequestBody  List<CartDTO> cartDTOList ){
+        productService.decreaseStock ( cartDTOList );
+
+    }
+
 }
