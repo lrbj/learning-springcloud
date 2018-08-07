@@ -28,27 +28,28 @@ public class Swagger {
      */
     @Bean
     public Docket createRestApi() {
-        return new Docket (DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.imooc.product.controller")) //API 接口位置
+        return new Docket ( DocumentationType.SWAGGER_2 )
+                .apiInfo ( apiInfo () )
+                .select ()
+                .apis ( RequestHandlerSelectors.basePackage ( "com.imooc.product.controller" ) ) //API 接口位置
 
-                .paths(PathSelectors.any())
-                .build();
+                .paths ( PathSelectors.any () )
+                .build ();
     }
 
     /**
      * 创建该API的基本信息（这些基本信息会展现在文档页面中）
      * 访问地址：http://项目实际地址/swagger-ui.html
+     *
      * @return
      */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder ()
-                .title("Spring Boot中使用Swagger2构建RESTful APIs")
-                .description("更多请关注http://www.baidu.com")
-                .termsOfServiceUrl("http://www.baidu.com")
-                .contact("sunf")
-                .version("1.0")
-                .build();
+                .title ( "Spring Boot中使用Swagger2构建RESTful APIs" )
+                .description ( "更多请关注http://www.baidu.com" )
+                .termsOfServiceUrl ( "http://www.baidu.com" )
+                .contact ( "sunf" )
+                .version ( "1.0" )
+                .build ();
     }
 }

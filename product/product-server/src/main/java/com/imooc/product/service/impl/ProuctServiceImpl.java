@@ -1,6 +1,6 @@
 package com.imooc.product.service.impl;
 
-import com.imooc.product.DTO.CartDTO;
+import com.imooc.product.common.DecreaseStockInput;
 import com.imooc.product.dataobject.ProductInfo;
 import com.imooc.product.enums.ProductStatusEnum;
 import com.imooc.product.enums.ResultEnum;
@@ -25,9 +25,10 @@ public class ProuctServiceImpl implements ProductService {
 
     @Autowired
     private ProductInfoRepository productInfoRepository;
+
     @Override
     public List<ProductInfo> findUpAll() {
-        return productInfoRepository.findByProductStatus (ProductStatusEnum.UP.getCode () );
+        return productInfoRepository.findByProductStatus ( ProductStatusEnum.UP.getCode () );
     }
 
     @Override
@@ -38,19 +39,19 @@ public class ProuctServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public void decreaseStock(List<CartDTO> cartDTOList) {
-        for(CartDTO cartDTO:cartDTOList){
-            Optional<ProductInfo> productInfoOptional = productInfoRepository.findById ( cartDTO.getProducId () );
+    public void decreaseStock(List<DecreaseStockInput> decreaseStockInputList) {
+        for (DecreaseStockInput decreaseStockInput : decreaseStockInputList) {
+            Optional<ProductInfo> productInfoOptional = productInfoRepository.findById ( decreaseStockInput.getProductId () );
             //判断商品是否存在
-            if( !productInfoOptional.isPresent ()){
-                throw  new ProductException ( ResultEnum.PRODUCT_NOT_EXIST );
+            if (!productInfoOptional.isPresent ()) {
+                throw new ProductException ( ResultEnum.PRODUCT_NOT_EXIST );
             }
 
             ProductInfo productInfo = productInfoOptional.get ();
             //判断库存是否存在
-            Integer  result = productInfo.getProductStock () - cartDTO.getProductQuantity ();
-            if(result < 0 ){
-                throw  new ProductException ( ResultEnum.PRODUCT_STOCK_ERROR );
+            Integer result = productInfo.getProductStock () - decreaseStockInput.getProductQuantity ();
+            if (result < 0) {
+                throw new ProductException ( ResultEnum.PRODUCT_STOCK_ERROR );
             }
 
             productInfo.setProductStock ( result );
