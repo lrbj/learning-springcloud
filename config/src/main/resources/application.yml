@@ -7,6 +7,8 @@ spring:
         git:
           uri: https://github.com/lrbj/config-repo
           username: lrbj
+          password: 31gsy11023
+          basedir: D:\learn\spring cloud\test\data
 
 eureka:
   client:
