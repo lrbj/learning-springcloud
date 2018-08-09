@@ -35,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderMasterRepository orderMasterRepository;
 
-    @Autowired
+    //@Autowired
     private ProductClient productClient;
 
     @Override
