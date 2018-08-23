@@ -15,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ResourceUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -36,6 +33,7 @@ public class OrderController {
 
     @Autowired
     OrderService orderService;
+
     /**
      * 1、参数检验
      * 2、查询商品信息
@@ -44,24 +42,35 @@ public class OrderController {
      * 5、订单入库
      */
     @PostMapping("/create")
-    @ApiImplicitParam( name = "orderForm", value = "订单信息", required = true, dataType = "OrderForm")
-    public ResultVO<Map<String, String >> create(@Valid @RequestBody  OrderForm orderForm,BindingResult bindingResult){
+    @ApiImplicitParam(name = "orderForm", value = "订单信息", required = true, dataType = "OrderForm")
+    public ResultVO <Map <String, String>> create(@Valid @RequestBody OrderForm orderForm,BindingResult bindingResult) {
 
-        if( bindingResult.hasErrors ()){
-            log.error("创建订单，参数不正确， orerForm = {}", orderForm);
-            throw  new OrderException ( ResultEnum.PARAM_ERROR.getCode (), bindingResult.getFieldError ().getDefaultMessage () );
+        if (bindingResult.hasErrors ()) {
+            log.error ("创建订单，参数不正确， orerForm = {}",orderForm);
+            throw new OrderException (ResultEnum.PARAM_ERROR.getCode (),bindingResult.getFieldError ().getDefaultMessage ());
         }
         //OrderFrom ——》 OrdeDTO
-        OrderDTO orderDTO = OrderForm2OrderDTOConverter.convert ( orderForm );
-        if(CollectionUtils.isEmpty ( orderDTO.getOrderDetailList () )){
-            log.error ( "[创建订单]购物车信息为空" );
-            throw new OrderException ( ResultEnum.CART_EMPTY );
+        OrderDTO orderDTO = OrderForm2OrderDTOConverter.convert (orderForm);
+        if (CollectionUtils.isEmpty (orderDTO.getOrderDetailList ())) {
+            log.error ("[创建订单]购物车信息为空");
+            throw new OrderException (ResultEnum.CART_EMPTY);
         }
 
-        OrderDTO result = orderService.create ( orderDTO );
+        OrderDTO result = orderService.create (orderDTO);
 
-        Map<String, String> map = new HashMap<> (  );
-        map.put ( "orderId",result.getOrderId () );
-        return ResultVOUtil.success(map);
+        Map <String, String> map = new HashMap <> ();
+        map.put ("orderId",result.getOrderId ());
+        return ResultVOUtil.success (map);
+    }
+
+    /**
+     * 完结订单
+     *
+     * @param orderId
+     * @return
+     */
+    @PostMapping("/finish")
+    public ResultVO <OrderDTO> finish(@RequestParam("orderId") String orderId) {
+        return ResultVOUtil.success (orderService.finish (orderId));
     }
 }

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.imooc.order.MqSenderTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 61.243 s - in com.imooc.order.MqSenderTest

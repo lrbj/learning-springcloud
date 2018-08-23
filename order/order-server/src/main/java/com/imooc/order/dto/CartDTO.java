@@ -9,9 +9,9 @@ import lombok.Data;
  */
 @Data
 public class CartDTO {
-    private  String producId;
+    private String producId;
 
-    private  Integer productQuantity;
+    private Integer productQuantity;
 
     public CartDTO() {
     }

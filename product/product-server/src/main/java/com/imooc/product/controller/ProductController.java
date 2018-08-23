@@ -42,6 +42,11 @@ public class ProductController {
      */
     @GetMapping("/list")
     public ResultVO<ProductVO> list() {
+        try {
+            Thread.sleep (3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace ();
+        }
 
         // 1、查询所有在架的商品
         List<ProductInfo> productInfoList = productService.findUpAll ();
@@ -86,6 +91,11 @@ public class ProductController {
     @PostMapping("/listForOrder")
     public List<ProductInfo> listForOrder(@RequestBody List<String> productIdList) {
 
+        try {
+            Thread.sleep (2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace ();
+        }
         return productService.findList ( productIdList );
     }
 

@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: CONFIG
+      profile: dev
+
+ # jpa:
+  #  show-sql: true
+eureka:
+    client:
+      service-url:
+         defaultZone: http://localhost:8761/eureka/
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 50000
