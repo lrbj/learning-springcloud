@@ -24,25 +24,9 @@ eureka:
 PRODUCT:
   ribbon:
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
-
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 5000
-    getProductInfoList:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 3000
-
-feign:
-  hystrix:
-    enabled: true
 management:
   context-path: /
 logging:
   level:
     org.springframework.cloud.openfeign.FeignClient: debug
+

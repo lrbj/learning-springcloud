@@ -44,7 +44,6 @@ public class ProductController {
 
     @GetMapping("/list")
     public ResultVO<ProductVO> list() {
-
         // 1、查询所有在架的商品
         List<ProductInfo> productInfoList = productService.findUpAll ();
         //2、获取类目type列表
@@ -88,11 +87,11 @@ public class ProductController {
     @PostMapping("/listForOrder")
     public List<ProductInfo> listForOrder(@RequestBody List<String> productIdList) {
 
-//        try {
-//            Thread.sleep (2000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace ();
-//        }
+        try {
+            Thread.sleep (2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace ();
+        }
         return productService.findList ( productIdList );
     }
 
