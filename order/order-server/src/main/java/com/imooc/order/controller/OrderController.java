@@ -8,6 +8,7 @@ import com.imooc.order.exception.OrderException;
 import com.imooc.order.form.OrderForm;
 import com.imooc.order.service.OrderService;
 import com.imooc.order.utils.ResultVOUtil;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import io.swagger.annotations.ApiImplicitParam;
 import javafx.print.Collation;
 import lombok.extern.slf4j.Slf4j;
@@ -41,6 +42,7 @@ public class OrderController {
      * 4、扣库存
      * 5、订单入库
      */
+
     @PostMapping("/create")
     @ApiImplicitParam(name = "orderForm", value = "订单信息", required = true, dataType = "OrderForm")
     public ResultVO <Map <String, String>> create(@Valid @RequestBody OrderForm orderForm,BindingResult bindingResult) {

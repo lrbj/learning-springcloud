@@ -10,6 +10,7 @@ import com.imooc.product.dataobject.ProductInfo;
 import com.imooc.product.service.CategoryService;
 import com.imooc.product.service.ProductService;
 import com.imooc.product.utils.ResultVOUtil;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,13 +41,9 @@ public class ProductController {
      * 3、查询类目
      * 4、构造数据
      */
+
     @GetMapping("/list")
     public ResultVO<ProductVO> list() {
-        try {
-            Thread.sleep (3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace ();
-        }
 
         // 1、查询所有在架的商品
         List<ProductInfo> productInfoList = productService.findUpAll ();
@@ -91,11 +88,11 @@ public class ProductController {
     @PostMapping("/listForOrder")
     public List<ProductInfo> listForOrder(@RequestBody List<String> productIdList) {
 
-        try {
-            Thread.sleep (2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace ();
-        }
+//        try {
+//            Thread.sleep (2000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace ();
+//        }
         return productService.findList ( productIdList );
     }
 

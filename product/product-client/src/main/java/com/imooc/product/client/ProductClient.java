@@ -24,7 +24,7 @@ public interface ProductClient {
     void decreaseStock(@RequestBody List<DecreaseStockInput> decreaseStockInputList);
 
     @Component
-     static class ProductClientFallback implements  ProductClient {
+    static class ProductClientFallback implements  ProductClient {
         @Override
         public List <ProductInfoOutput> listForOrder(List <String> productIdList) {
             return null;

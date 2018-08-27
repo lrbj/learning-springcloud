@@ -31,7 +31,7 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 1000
+            timeoutInMilliseconds: 5000
     getProductInfoList:
       execution:
         isolation:
@@ -43,3 +43,6 @@ feign:
     enabled: true
 management:
   context-path: /
+logging:
+  level:
+    org.springframework.cloud.openfeign.FeignClient: debug
