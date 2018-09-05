@@ -22,4 +22,4 @@
 7. Hystrix： 服务容错
 8. Spring cloud sleuth， Zipkin：服务追踪
 9. docker: 容器
-10. rancher：为了更加方便地管理rancher
+10. rancher：为了更加方便地管理docker
